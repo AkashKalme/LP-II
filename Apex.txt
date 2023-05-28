@@ -1,0 +1,132 @@
+// Currency Converter
+// Class
+public class CurrencyConverter {
+    public Double rupee { get; set; }
+    public Double dollar {get; set; }
+    
+    public void convertToRupee()
+    {
+        rupee = dollar*82.71;
+    }
+    
+    public void convertToDollar()
+    {
+        dollar = rupee/82.71;
+    }
+}
+
+// Visualizer
+<apex:page controller="CurrencyConverter">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Currency Converter">
+                <apex:inputText value="{!rupee}" label="Indian Rupee" />
+                <apex:commandButton value="Convert to Dollars" action="{!convertToDollar}" reRender="outputPanel" />
+                <apex:inputText value="{!dollar}" label="American Dollar" />
+                <apex:commandButton value="Convert to Rupees" action="{!convertToRupee}" reRender="outputPanel" />
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Converted Currency Values" collapsible="false">
+                <apex:outputPanel id="outputPanel">
+                    <apex:outputText value="Indian Rupees: {!rupee}" rendered="{!dollar != null}" />
+                    <br/>
+                    <apex:outputText value="American Dollars: {!dollar}" rendered="{!rupee != null}" />
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+
+// Calculator
+// Class
+public class Calculator {
+    public integer firstNumber { get; set; }
+    public integer secondNumber { get; set; }
+    public Double result { get; set; }
+    
+    public void Addition() {
+        result = firstNumber + secondNumber;
+    }
+    
+    public void Subtraction() {
+        result = firstNumber - secondNumber;
+    }
+    
+    public void Multiplication() {
+        result = firstNumber * secondNumber;
+    }
+    
+    public void Division() {
+        result = firstNumber / secondNumber;
+    }
+    
+    public void Logarithm() {
+        result = math.log10((Double) firstNumber) / math.log10((Double) secondNumber);
+    }
+
+    public void Square() {
+        result = firstNumber * firstNumber;
+    }
+
+    public void SquareRoot() {
+        result = math.sqrt(firstNumber);
+    }
+}
+
+// Visualizer
+<apex:page controller="Calculator">
+    <apex:sectionHeader title="Calculator"/>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons location="bottom">
+            	<apex:commandButton value="Addition" action="{!Addition}" reRender="result" />
+               	<apex:commandButton value="Subtraction" action="{!Subtraction}" reRender="result" />
+               	<apex:commandButton value="Multiplication" action="{!Multiplication}" reRender="result" />
+               	<apex:commandButton value="Division" action="{!Division}" reRender="result" />
+                <apex:commandButton value="Logarithm" action="{!Logarithm}" reRender="result" />
+                <apex:commandButton value="Square" action="{!Square}" reRender="result" />
+                <apex:commandButton value="Square Root" action="{!SquareRoot}" reRender="result" />
+            </apex:pageBlockButtons>
+        	<apex:pageBlockSection >
+            	<apex:inputText value="{!firstNumber}" label="First Number" />
+                <apex:inputText value="{!secondNumber}" label="Second Number" />
+                <apex:outputText value="{!result}" label="Result" id="result" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+
+// Temperature Converter
+// Class
+public class TemperatureConverter {
+    public Double celsius { get; set; }
+    public Double fahrenheit { get; set; }
+    
+    public void convertToFahrenheit() {
+        fahrenheit = (celsius * 9/5) + 32;
+    }
+    
+    public void convertToCelsius() {
+        celsius = (fahrenheit - 32) * 5/9;
+    }
+}
+
+// Visulizer
+<apex:page controller="TemperatureConverter">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Temperature Converter">
+                <apex:inputText value="{!celsius}" label="Celsius"/>
+                <apex:commandButton value="Convert to Fahrenheit" action="{!convertToFahrenheit}" rerender="outputPanel"/>
+                <apex:inputText value="{!fahrenheit}" label="Fahrenheit"/>
+                <apex:commandButton value="Convert to Celsius" action="{!convertToCelsius}" rerender="outputPanel"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Converted Temperature" collapsible="false">
+                <apex:outputPanel id="outputPanel">
+                    <apex:outputText value="Celsius: {!celsius}" rendered="{!fahrenheit != null}"/>
+                    <br/>
+                    <apex:outputText value="Fahrenheit: {!fahrenheit}" rendered="{!celsius != null}"/>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
